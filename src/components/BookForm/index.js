@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class BookForm extends Component {
+  static propTypes = {
+    addBook: PropTypes.func.isRequired,
+  }
+
   constructor(props) {
     super(props);
 
