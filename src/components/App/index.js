@@ -1,16 +1,26 @@
-import React, { Component } from 'react';
-import BookList from '../BookList/';
-import BookForm from '../BookForm/';
-import './App.css';
+import React, { Component } from "react";
+import BookList from "../BookList/";
+import BookForm from "../BookForm/";
+import "./App.css";
+import Grid from "@material-ui/core/Grid";
+
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      books: [],
-    }
+      books: [
+        {
+          bookName: "The Whisperer",
+          authorName: "Donato Carrisi",
+          numOfPages: 547,
+          isRead: true
+        }
+      ]
+    };
 
     this.addBook = this.addBook.bind(this);
+    this.deleteBook = this.deleteBook.bind(this);
   }
 
   addBook(book) {
@@ -18,18 +28,28 @@ class App extends Component {
 
     books.push(book);
 
-    this.setState({ 
-      books,
+    this.setState({
+      books
+    });
+  }
+
+  deleteBook(index) {
+    const { books } = this.state;
+
+    books.splice(index, 1);
+
+    this.setState({
+      books
     });
   }
 
   render() {
     return (
-      <div>
+      <Grid container>
         <BookForm addBook={this.addBook} />
-        <BookList books={this.state.books} />
-      </div>
-    )
+        <BookList books={this.state.books} deleteBook={this.deleteBook} />
+      </Grid>
+    );
   }
 }
 
