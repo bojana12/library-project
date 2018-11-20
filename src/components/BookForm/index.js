@@ -17,7 +17,7 @@ class BookForm extends Component {
     this.state = {
       bookName: "",
       authorName: "",
-      numOfPages: null,
+      numOfPages: "",
       isRead: false
     };
 
