@@ -1,6 +1,6 @@
 {
   "name": "library",
-  "homepage": "http://bojana12.github.io/library-project",
+  "homepage": "http://bojana12.github.io/library-project/build",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
