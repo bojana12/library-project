@@ -1,9 +1,7 @@
 import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
 import BookList from "../BookList/";
 import BookForm from "../BookForm/";
-import "./App.css";
-import Grid from "@material-ui/core/Grid";
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +19,7 @@ class App extends Component {
 
     this.addBook = this.addBook.bind(this);
     this.deleteBook = this.deleteBook.bind(this);
+    this.editBook = this.editBook.bind(this);
   }
 
   componentDidMount() {
@@ -84,11 +83,25 @@ class App extends Component {
     });
   }
 
+  editBook(book, index) {
+    const { books } = this.state;
+
+    books[index] = book;
+
+    this.setState({
+      books
+    });
+  }
+
   render() {
     return (
       <Grid container>
-        <BookForm addBook={this.addBook} />
-        <BookList books={this.state.books} deleteBook={this.deleteBook} />
+        <BookForm saveBook={this.addBook} />
+        <BookList
+          books={this.state.books}
+          deleteBook={this.deleteBook}
+          editBook={this.editBook}
+        />
       </Grid>
     );
   }

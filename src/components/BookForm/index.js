@@ -8,7 +8,8 @@ import Grid from "@material-ui/core/Grid";
 
 class BookForm extends Component {
   static propTypes = {
-    addBook: PropTypes.func.isRequired
+    saveBook: PropTypes.func.isRequired,
+    book: PropTypes.object
   };
 
   constructor(props) {
@@ -26,6 +27,14 @@ class BookForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.book) {
+      this.setState({
+        ...this.props.book
+      });
+    }
+  }
+
   handleInputChange(e, name) {
     this.setState({ [name]: e.target.value });
   }
@@ -38,9 +47,9 @@ class BookForm extends Component {
     e.preventDefault();
 
     const { bookName, authorName, numOfPages, isRead } = this.state;
-    const newBook = { bookName, authorName, numOfPages, isRead };
+    const formBook = { bookName, authorName, numOfPages, isRead };
 
-    this.props.addBook(newBook);
+    this.props.saveBook(formBook);
 
     this.setState({
       bookName: "",
@@ -51,9 +60,11 @@ class BookForm extends Component {
   }
 
   render() {
+    const { bookName, authorName, numOfPages, isRead } = this.state;
+
     return (
       <div style={{ width: "100%", textAlign: "center" }}>
-        <h1>Library</h1>
+        <h1>{this.props.book ? "Edit Book" : "Library"}</h1>
 
         <form onSubmit={this.handleSubmit} style={{ display: "flex" }}>
           <Grid container justify={"space-around"}>
@@ -65,7 +76,7 @@ class BookForm extends Component {
                 label="Book Name"
                 placeholder="Book Name"
                 margin="normal"
-                value={this.state.bookName}
+                value={bookName}
                 onChange={e => this.handleInputChange(e, "bookName")}
                 required
               />
@@ -78,7 +89,7 @@ class BookForm extends Component {
                 label="Author Name"
                 placeholder="Author Name"
                 margin="normal"
-                value={this.state.authorName}
+                value={authorName}
                 onChange={e => this.handleInputChange(e, "authorName")}
                 required
               />
@@ -92,7 +103,7 @@ class BookForm extends Component {
                 label="Number of Pages"
                 placeholder="Number of Pages"
                 margin="normal"
-                value={this.state.numOfPages}
+                value={numOfPages}
                 onChange={e => this.handleInputChange(e, "numOfPages")}
                 required
               />
@@ -105,7 +116,7 @@ class BookForm extends Component {
                     type="checkbox"
                     name="read"
                     color="primary"
-                    checked={this.state.isRead}
+                    checked={isRead}
                     onChange={this.handleCheckboxChange}
                   />
                 }

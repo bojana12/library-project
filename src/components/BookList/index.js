@@ -8,15 +8,18 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import EditBook from "../EditBook/";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 class BookList extends Component {
   static propTypes = {
     books: PropTypes.array.isRequired,
-    deleteBook: PropTypes.func.isRequired
+    deleteBook: PropTypes.func.isRequired,
+    editBook: PropTypes.func.isRequired
   };
 
   render() {
-    const { books, deleteBook } = this.props;
+    const { books, deleteBook, editBook } = this.props;
 
     return (
       <Grid item xs={12} style={{ marginTop: "30px" }}>
@@ -44,12 +47,9 @@ class BookList extends Component {
                     <TableCell numeric>{book.numOfPages}</TableCell>
                     <TableCell>{book.isRead ? "Yes" : "No"}</TableCell>
                     <TableCell>
-                      <Button
-                        variant="outlined"
-                        color="secondary"
-                        onClick={() => deleteBook(index)}
-                      >
-                        Delete Book
+                      <EditBook book={book} editBook={editBook} index={index} />
+                      <Button color="secondary">
+                        <DeleteIcon onClick={() => deleteBook(index)} />
                       </Button>
                     </TableCell>
                   </TableRow>
