@@ -1,6 +1,6 @@
 {
   "name": "library",
-  "homepage": "http://bojana12.github.io/library-project/build",
+  "homepage": "http://bojana12.github.io/library-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,6 +29,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "gh-pages": "^2.2.0"
   }
 }
